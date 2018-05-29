@@ -69,7 +69,7 @@ int sd_mount()
 
 	if (!sdmmc_storage_init_sd(&sd_storage, &sd_sdmmc, SDMMC_1, SDMMC_BUS_WIDTH_4, 11))
 	{
-		EPRINTF("Failed to init SD card (make sure that it is inserted).");
+		EPRINTF("Failed to access SD card (make sure that it is inserted).");
 	}
 	else
 	{
@@ -1187,7 +1187,7 @@ void about()
 {
 	static const char octopus[] =
 	"hekate (c) 2018 naehrwert, st4rk\n\n"
-	"Thanks to: %kderrek, nedwill, plutoo, shuffle2, smea, thexyz, yellows8%k\n\n"
+	"Thanks to: %kderrek, nedwill, plutoo, shuffle2, smea, thexyz, yellows, and ctcaer8%k\n\n"
 	"Greetings to: fincs, hexkyz, SciresM, Shiny Quagsire, WinterMute\n\n"
 	"Open source and free packages used:\n"
 	" - FatFs R0.13a (Copyright (C) 2017, ChaN)\n"
@@ -1260,18 +1260,18 @@ menu_t menu_autorcm = {
 ment_t ment_tools[] = {
 	MDEF_BACK(),
 	MDEF_CHGLINE(),
-	MDEF_CAPTION("------ Full --------", 0xFFE6B90A),
+	MDEF_CAPTION("------ Full --------", #bc9af7),
 	MDEF_HANDLER("Dump RAW eMMC", dump_emmc_rawnand),
 	MDEF_HANDLER("Dump eMMC BOOT", dump_emmc_boot),
 	MDEF_CHGLINE(),
-	MDEF_CAPTION("-- GP Partitions --", 0xFFE6B90A),
+	MDEF_CAPTION("-- GP Partitions --", #bc9af7),
 	MDEF_HANDLER("Dump eMMC SYS", dump_emmc_system),
 	MDEF_HANDLER("Dump eMMC USER", dump_emmc_user),
 	MDEF_CHGLINE(),
-	MDEF_CAPTION("------ Misc -------", 0xFFE6B90A),
+	MDEF_CAPTION("------ Misc -------", #bc9af7),
 	MDEF_HANDLER("Dump package1", dump_package1),
 	MDEF_CHGLINE(),
-	MDEF_CAPTION("---- Dangerous ----", 0xFF0000FF),
+	MDEF_CAPTION("------ Risky ------", 0xFF0000FF),
 	MDEF_MENU("AutoRCM", &menu_autorcm),
 	MDEF_END()
 };
@@ -1282,21 +1282,21 @@ menu_t menu_tools = {
 };
 
 ment_t ment_top[] = {
-	MDEF_HANDLER("Launch firmware", launch_firmware),
+	MDEF_HANDLER("Launch OS", launch_firmware),
 	MDEF_CAPTION("---------------", 0xFF444444),
 	MDEF_MENU("Tools", &menu_tools),
 	MDEF_MENU("Console info", &menu_cinfo),
 	MDEF_CAPTION("---------------", 0xFF444444),
 	MDEF_HANDLER("Reboot (Normal)", reboot_normal),
-	MDEF_HANDLER("Reboot (RCM)", reboot_rcm),
+	MDEF_HANDLER("Reboot (Recovery Mode)", reboot_rcm),
 	MDEF_HANDLER("Power off", power_off),
 	MDEF_CAPTION("---------------", 0xFF444444),
-	MDEF_HANDLER("About", about),
+	MDEF_HANDLER("Credits", about),
 	MDEF_END()
 };
 menu_t menu_top = {
 	ment_top,
-	"hekate - ipl", 0, 0
+	"Hekate Mod by: BlackRex and crc32", 0, 0
 };
 
 extern void pivot_stack(u32 stack_top);
